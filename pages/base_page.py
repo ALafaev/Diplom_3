@@ -1,5 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import ElementClickInterceptedException
+from time import sleep
 
 class BasePage:
 
@@ -42,3 +44,23 @@ class BasePage:
 
     def check_element_is_enabled(self, locator):
         return self.driver.find_element(*locator).is_enabled()
+
+    def wait_for_loading_page(self):
+        WebDriverWait(self.driver, 10).until(lambda driver: driver.execute_script('return document.readyState') == 'complete')
+
+    def check_presence_of_element(self, locator):
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(locator))
+
+    def scroll_to_element_and_click(self, locator):
+        element = self.driver.find_element(*locator)
+        self.driver.execute_script("arguments[0].scrollIntoView({block:'center'});", element)
+        self.driver.execute_script("arguments[0].click();", element)
+
+    def click_to_element_few_tries(self, locator):
+        attempts = 3
+        for _ in range(attempts):
+            try:
+                self.driver.find_element(*locator).click()
+                break  # Успешный клик, завершаем цикл
+            except ElementClickInterceptedException:
+                sleep(2)  # Ожидание перед следующей попыткой

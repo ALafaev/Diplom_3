@@ -1,6 +1,8 @@
 import allure
 from selenium import webdriver
 from urls import PageUrls
+from api.api_methods import ApiMethods
+from helpers import *
 import pytest
 
 @pytest.fixture(params=['firefox', 'chrome'], autouse=True) # Запуск браузера
@@ -19,3 +21,13 @@ def driver(request):
     yield driver
     with allure.step(f'Закрытие браузера {request.param}'):
         driver.quit()
+
+@pytest.fixture()
+def user():
+    reg_values = user_registration_data()
+    user_create_response = ApiMethods.create_user(reg_values)
+    email = reg_values["email"]
+    password = reg_values["password"]
+    yield email, password
+    token = user_create_response.json()["accessToken"]
+    ApiMethods.delete_user(token)
