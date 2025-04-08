@@ -8,6 +8,7 @@ class PageUrls:
     RESET_PASSWORD_PAGE = BaseUrls.BASE_URL + '/reset-password'
     PERSONAL_ACCOUNT_PAGE = BaseUrls.BASE_URL + '/account/profile'
     ORDER_HISTORY_PAGE = BaseUrls.BASE_URL + '/account/order-history'
+    ORDER_FEED_PAGE = BaseUrls.BASE_URL + '/feed'
 
 class ApiUrls:
     USER_CREATION = BaseUrls.BASE_URL + '/api/auth/register'

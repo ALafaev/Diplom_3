@@ -1,3 +1,4 @@
+from seletools.actions import drag_and_drop
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import ElementClickInterceptedException
@@ -64,3 +65,11 @@ class BasePage:
                 break  # Успешный клик, завершаем цикл
             except ElementClickInterceptedException:
                 sleep(2)  # Ожидание перед следующей попыткой
+
+    def wait_for_invisibility_of_element(self, locator):
+        return WebDriverWait(self.driver,10).until(EC.invisibility_of_element_located(locator))
+
+    def drag_and_drop(self, source_locator, target_locator):
+        source = self.driver.find_element(*source_locator)
+        target = self.driver.find_element(*target_locator)
+        drag_and_drop(self.driver, source, target)
