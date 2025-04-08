@@ -5,7 +5,7 @@ from api.api_methods import ApiMethods
 from helpers import *
 import pytest
 
-@pytest.fixture(params=['firefox', 'chrome'], autouse=True) # Запуск браузера
+@pytest.fixture(params=['firefox', 'chrome'], autouse=True) # Запуск браузеров Firefox и Chrome
 def driver(request):
     driver = None
     with allure.step(f'Запуск браузера {request.param}'):
@@ -22,7 +22,7 @@ def driver(request):
     with allure.step(f'Закрытие браузера {request.param}'):
         driver.quit()
 
-@pytest.fixture()
+@pytest.fixture() # Регистрация нового пользователя и его удаление после завершения теста
 def user():
     reg_values = user_registration_data()
     user_create_response = ApiMethods.create_user(reg_values)

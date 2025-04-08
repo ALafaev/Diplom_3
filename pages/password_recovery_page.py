@@ -2,7 +2,7 @@ import allure
 from ..pages.base_page import BasePage
 from ..locators.password_recovery_page_locators import PasswordRecoveryPageLocators
 from urls import PageUrls
-from data import *
+from helpers import user_registration_data
 
 class PasswordRecoveryPage(BasePage):
     def __init__(self, driver):
@@ -20,7 +20,8 @@ class PasswordRecoveryPage(BasePage):
 
     @allure.step('Заполнить поле Email')
     def fill_email_field(self):
-        self.filling_the_field(self.locators.EMAIL_FIELD, EMAIL)
+        email = user_registration_data()["email"]
+        self.filling_the_field(self.locators.EMAIL_FIELD, email)
 
     @allure.step('Клик на кнопку "Восстановить"')
     def click_to_recovery_button(self):

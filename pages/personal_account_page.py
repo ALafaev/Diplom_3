@@ -9,11 +9,7 @@ class PersonalAccountPage(BasePage):
         self.locators = PersonalAccountPageLocators
         self.url = PageUrls.PERSONAL_ACCOUNT_PAGE
 
-    @allure.step('Переход на страницу "Личный кабинет" по url')
-    def open(self):
-        self.get(self.url)
-
-    @allure.step('Проверка, что текущий url соответствует url страницы "Восстановление пароля"')
+    @allure.step('Проверка, что текущий url соответствует url страницы "Личный кабинет"')
     def check_current_url(self):
         return self.wait_url_to_be(self.url)
 

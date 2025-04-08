@@ -29,6 +29,6 @@ class LoginPage(BasePage):
     def click_to_enter_button(self):
         self.click_to_element_few_tries(self.locators.ENTER_BUTTON)
 
-    @allure.step('Проверка, что текущий url соответствует url страницы "Вход"')
+    @allure.step('Проверка, что текущий url соответствует url страницы авторизации')
     def check_current_url(self):
         return self.wait_url_to_be(self.url)

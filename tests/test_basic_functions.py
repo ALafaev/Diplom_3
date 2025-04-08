@@ -19,7 +19,7 @@ class TestBasicFunctions:
 
         main_page = MainPage(driver)
 
-        assert main_page.check_visibility_of_make_burger_header(), "Элемент не найден"
+        assert main_page.check_visibility_of_make_burger_header(), "Заголовок не найден"
 
     @allure.title('Проверка перехода на страницу "Лента заказов" по кнопке "Лента заказов"')
     @allure.description('Открываем страницу авторизации, кликаем на "Лента заказов", сверяем текущий url с ожидаемым')
@@ -63,7 +63,7 @@ class TestBasicFunctions:
 
     @allure.title('Проверка, что залогиненный пользователь может оформить заказ')
     @allure.description('Авторизуемся, добавляем ингредиент, кликаем "Оформить заказ", проверяем наличие надписи "идентификатор заказа"')
-    def test_click_to_personal_account_button_authorized_user_open_personal_account_page(self, driver, user):
+    def test_authorized_user_is_able_to_make_order(self, driver, user):
         login_page = LoginPage(driver)
         login_page.open()
         email, password = user
@@ -76,4 +76,4 @@ class TestBasicFunctions:
         main_page.move_ingredient_to_constructor_field()
         main_page.click_to_make_order_button()
 
-        assert main_page.check_visibility_of_order_identifier_title()
+        assert main_page.check_visibility_of_order_id(), "ID заказа не отображается"
