@@ -1,4 +1,3 @@
-from time import sleep
 import allure
 
 from helpers import *
@@ -46,7 +45,6 @@ class TestPasswordRecovery:
         password_recovery_page.click_to_recovery_button()
 
         reset_password_page = ResetPasswordPage(driver)
-        sleep(1)
         reset_password_page.check_show_password_button_is_clickable()
         reset_password_page.click_to_show_password_button()
         assert reset_password_page.check_password_field_is_active(), "Поле не активно"
