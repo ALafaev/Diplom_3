@@ -1,6 +1,7 @@
 from time import sleep
 import allure
 
+from helpers import *
 from ..pages.login_page import LoginPage
 from ..pages.password_recovery_page import PasswordRecoveryPage
 from ..pages.header_page import HeaderPage
@@ -28,7 +29,8 @@ class TestPasswordRecovery:
     def test_click_to_recovery_button_open_reset_password_page(self, driver):
         password_recovery_page = PasswordRecoveryPage(driver)
         password_recovery_page.open()
-        password_recovery_page.fill_email_field()
+        email = user_registration_data()["email"]
+        password_recovery_page.fill_email_field(email)
         password_recovery_page.click_to_recovery_button()
 
         reset_password_page = ResetPasswordPage(driver)
@@ -39,7 +41,8 @@ class TestPasswordRecovery:
     def test_click_to_show_password_button_make_password_field_active(self, driver):
         password_recovery_page = PasswordRecoveryPage(driver)
         password_recovery_page.open()
-        password_recovery_page.fill_email_field()
+        email = user_registration_data()["email"]
+        password_recovery_page.fill_email_field(email)
         password_recovery_page.click_to_recovery_button()
 
         reset_password_page = ResetPasswordPage(driver)

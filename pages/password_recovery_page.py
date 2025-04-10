@@ -19,8 +19,7 @@ class PasswordRecoveryPage(BasePage):
         return self.wait_url_to_be(self.url)
 
     @allure.step('Заполнить поле Email')
-    def fill_email_field(self):
-        email = user_registration_data()["email"]
+    def fill_email_field(self, email):
         self.filling_the_field(self.locators.EMAIL_FIELD, email)
 
     @allure.step('Клик на кнопку "Восстановить"')
